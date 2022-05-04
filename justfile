@@ -5,6 +5,9 @@ render_remote scene:
     ssh kali  "pwd && cd ~/expos && just lrf {{scene}} && exit"
     cd .. && rsync -azP kali:~/expos/media/videos/main/2160p60/{{scene}}.mp4 expos/videos
     just open {{scene}}
+
+edit:
+    open Notebook.wls -a "Mathematica"
     
 open scene:
     qil "QuickTime Player"

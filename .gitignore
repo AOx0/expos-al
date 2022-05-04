@@ -4,3 +4,5 @@
 __pycache__/
 
 media/
+
+*.mp4
