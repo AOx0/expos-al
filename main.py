@@ -463,3 +463,10 @@ class Expo1(Scene):
         self.play(*[FadeOut(mob) for mob in self.mobjects])
 
         self.wait(1)
+
+
+class Expo2(Scene):
+    def construct(self):
+        texto = MathTex("r = 2")
+        self.play(Write(texto))
+        self.wait(1)
