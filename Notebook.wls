@@ -20,14 +20,24 @@ mat=({
  {1, 3, 7, 0, 3, -2}
 });
 
+(* Gauss *)
 mat = Rp[mat, {1, 2}, -2];
+MatrixForm@mat
 mat = Rp[mat, {1, 3}, -1];
+MatrixForm@mat
 mat = Sw[mat, {2,3}];
 MatrixForm@mat
+
+(* Gauss-Jordan *)
 mat = Rp[mat, {3, 2}, 1];
+MatrixForm@mat
 mat = Rp[mat, {3, 1}, -1];
+MatrixForm@mat
 mat = Rp[mat, {2, 1}, -2];
 MatrixForm@mat
+
+
+
 
 
 

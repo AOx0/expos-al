@@ -1,7 +1,7 @@
 alias rr := render_remote
 
 render_remote scene:
-    cd .. && rsync -azP expos kali:~ --exclude=".git" --exclude="videos"
+    cd .. && rsync -azP expos kali:~ --exclude=".git" --exclude="videos" --exclude=".idea"
     ssh kali  "pwd && cd ~/expos && just lrf {{scene}} && exit"
     cd .. && rsync -azP kali:~/expos/media/videos/main/2160p60/{{scene}}.mp4 expos/videos
     just open {{scene}}
@@ -11,6 +11,7 @@ edit:
     
 open scene:
     qil "QuickTime Player"
+    sleep 0.5
     open videos/{{scene}}.mp4 -a "QuickTime Player"
 
 lrvl scene:
@@ -22,10 +23,10 @@ lrl scene:
 lrf scene:
     just render_local manim.cfg {{scene}}
 
-render_local config scene:
+render_local config scene caching="yes":
     manim \
         --format mp4 \
         -c cfg/{{config}} \
-        --disable_caching \
+        {{ if caching == "yes" { "" } else { "--disable_caching" } }} \
         -p \
         main.py {{scene}}
