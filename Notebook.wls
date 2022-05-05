@@ -5,17 +5,17 @@ Sw[mat_, r_] := Module[{tem, res=mat},
 	tem = res[[r[[2]]]] ;
 	res[[r[[2]]]]= res[[r[[1]]]] ;
 	res[[r[[1]]]]= tem;
-	res
+	Simplify[res]
 ];
 
 Rp[mat_, r_, op_] := Module[{tem, res=mat}, 
 	res[[r[[2]]]] = op mat[[r[[1]]]] + mat[[r[[2]]]] ;
-	res
+	Simplify[res]
 ];
 
 Rd[mat_, r_, op_] := Module[{tem, res=mat}, 
 	res[[r]] = mat[[r]]/op;
-	res
+	Simplify[res]
 ];
 
 
@@ -43,10 +43,10 @@ MatrixForm@mat
 
 
 mat=({
- {1, 2, 0},
- {2, 1, 1},
- {2, -1, 1},
- {1, 2, 2}
+ {1, 2, 0, p1},
+ {2, 1, 1, p2},
+ {2, -1, 1, p3},
+ {1, 2, 2, p4}
 });
 
 (* Gauss *)
@@ -74,4 +74,12 @@ mat = Rp[mat, {2, 1}, -2];
 MatrixForm@mat
 
 
+MatrixForm@RowReduce[{
+ {1, 2, 0},
+ {2, 1, 1},
+ {2, -1, 1},
+ {1, 2, 2}
+}]
 
+
+Simplify[p1-2 (1/3 (2 p1-p2)+1/2 (2 p1-5/3 (2 p1-p2)-p3))]
