@@ -1,6 +1,5 @@
 from manim import *
 
-
 def animate_change(self, text, text0, text3, text3_pos, offset, n1, n2):
     text_b = MathTex(r"-2 {(" + str(n1) + "})} + {(" + str(n2) + ")}").next_to(text, DOWN).shift(DOWN)
 
@@ -463,6 +462,36 @@ class Expo1(Scene):
         self.play(*[FadeOut(mob) for mob in self.mobjects])
 
         self.wait(1)
+
+
+def parametric(u: float, v:float ):
+    return np.array([
+        -3.0 * u - 2.0 * v - 3.0,
+        2.0 * u,
+        2.0 * u + 3.0 * v + 7.0,
+    ])
+
+
+class Expo1Pos(ThreeDScene):
+    def construct(self):
+        curve1 = Surface(
+            lambda u, v: np.array([
+                -3.0 * u - 2.0 * v - 3.0,
+                2.0 * u,
+                2.0 * u + 3.0 * v + 7.0,
+            ])
+            , color=RED, u_range=[-PI, PI], v_range=[-PI, PI]
+        ).set_shade_in_3d(True)
+
+        axes = ThreeDAxes()
+
+        self.set_camera_orientation(phi=80 * DEGREES, theta=-60 * DEGREES)
+
+        self.begin_ambient_camera_rotation(rate=1)
+
+        self.play(Create(axes), Create(curve1))
+
+        self.wait()
 
 
 class Expo2(Scene):
