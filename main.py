@@ -1,5 +1,6 @@
 from manim import *
 
+
 def animate_change(self, text, text0, text3, text3_pos, offset, n1, n2):
     text_b = MathTex(r"-2 {(" + str(n1) + "})} + {(" + str(n2) + ")}").next_to(text, DOWN).shift(DOWN)
 
@@ -32,6 +33,31 @@ def animate_change(self, text, text0, text3, text3_pos, offset, n1, n2):
 class Expo1(Scene):
     def construct(self):
         self: Scene
+
+        text0 = Text(
+            "Resolver los siguientes sistemas de ecuaciones por medio\n"
+            "de Gauss y de interpretacion geometrica del conjunto solucion", font_size=23.0
+        )
+
+        self.play(Write(text0))
+
+        self.wait(2)
+
+        text0.shift(UP * 2)
+
+        text1 = MathTex(
+            r"""
+            x_1 + 2x_2 + 4x_3 + x_4  -x_5 = 1\\
+            2x_1 + 4x_2 + 8x_3 + 3x_4 -4x_5 = 2 \\
+            x_1 + 3x_2 + 7x_3 + 0x_4 + 3x_5 = -2 \\
+            """
+        )
+
+        self.play(Write(text1))
+
+        self.wait(1)
+
+        self.play(FadeOut(text0), FadeOut(text1))
 
         text0 = MathTex(r"""
         \left(
@@ -496,6 +522,287 @@ class Expo1Pos(ThreeDScene):
 
 class Expo2(Scene):
     def construct(self):
-        texto = MathTex("r = 2")
+
+        text1 = MathTex(r"\text{1. Determine si } S \text{ es genera } M_{2,2}").shift(UP * 2)
+        text2 = MathTex(r"\text{2. Determine si } S \text{ es linealmente independiente}").next_to(text1, DOWN)
+
+        self.play(Write(text1))
+        self.play(Write(text2))
+
+        texto = MathTex(r"""
+        S = \left\{
+            \left(
+            \begin{array}{cc}
+                 1 & 2 \\
+                 2 & 1\\
+            \end{array}
+            \right),
+            \left(
+            \begin{array}{cc}
+                 2 & 1 \\
+                 -1 & 2\\
+            \end{array}
+            \right),
+            \left(
+            \begin{array}{cc}
+                 0 & 1 \\
+                 1 & 2\\
+            \end{array}
+            \right)
+        \right\}""")
+
         self.play(Write(texto))
         self.wait(1)
+
+        self.play(*[FadeOut(obj) for obj in (text1, text2)])
+
+        gen1 = MathTex(r"""
+            \text{gen}(S) = 
+            x_1 \left(
+            \begin{array}{cc}
+                 1 & 2 \\
+                 2 & 1\\
+            \end{array}
+            \right) + 
+            x_2 \left(
+            \begin{array}{cc}
+                 2 & 1 \\
+                 -1 & 2\\
+            \end{array}
+            \right) +
+            x_3 \left(
+            \begin{array}{cc}
+                 0 & 1 \\
+                 1 & 2\\
+            \end{array}
+            \right)
+        """)
+
+        self.play(*[obj.animate.shift(UP * 2) for obj in self.mobjects])
+        self.play(Write(gen1))
+        self.wait(1)
+
+        gen2 = MathTex(r"""
+            \text{gen}(S) = 
+             \left(
+            \begin{array}{cc}
+                 x_1 & 2x_1 \\
+                 2x_1 & x_1\\
+            \end{array}
+            \right) + 
+            \left(
+            \begin{array}{cc}
+                 2x_2 & x_2 \\
+                 -x_2 & 2x_2\\
+            \end{array}
+            \right) +
+            \left(
+            \begin{array}{cc}
+                 0 & x_3 \\
+                 x_3 & 2x_3\\
+            \end{array}
+            \right)
+        """)
+
+        self.play(*[obj.animate.shift(UP * 2) for obj in self.mobjects])
+        self.play(Write(gen2))
+        self.wait(1)
+
+        gen3 = MathTex(r"""
+            \text{gen}(S) = 
+             \left(
+                \begin{array}{cc}
+                     x_1 + 2x_2 & 2x_1 + x_2 + x_3\\
+                     2x_1-x_2+x_3 & x_1+2x_2+2x_3\\
+                \end{array}
+            \right)
+        """)
+
+        self.play(*[obj.animate.shift(UP * 2) for obj in self.mobjects])
+        self.play(Write(gen3))
+        self.wait(1)
+
+        gen4 = MathTex(r"""
+           \left(
+               \begin{array}{cc}
+                    p_1 & p_2\\
+                    p_3 & p_4\\
+               \end{array}
+           \right) = 
+            \left(
+               \begin{array}{cc}
+                    x_1 + 2x_2 & 2x_1 + x_2 + x_3\\
+                    2x_1-x_2+x_3 & x_1+2x_2+2x_3\\
+               \end{array}
+           \right)
+        """)
+
+        self.play(*[obj.animate.shift(UP * 2) for obj in self.mobjects])
+        self.play(Write(gen4))
+        self.wait(1)
+
+        gen5 = MathTex(r"""
+           x_1 + 2x_2 = p_1\\
+           2x_1 + x_2 + x_3 = p_2\\
+           2x_1-x_2+x_3 = p_3\\
+           x_1+2x_2+2x_3 = p_4
+       """)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen5))
+        self.wait(1)
+
+        gen6 = MathTex(r"""
+            \left(
+               \begin{array}{ccc}
+                    1 & 2 & 0\\
+                    2 & 1 & 1\\
+                    2 & -1 & 1\\
+                    1 & 2 & 2
+               \end{array}
+           \right)
+        """)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen6))
+        self.wait(1)
+
+        gen7 = MathTex(r"""
+            \left(
+                \begin{array}{ccc}
+                 1 & 2 & 0 \\
+                 0 & -3 & 1 \\
+                 2 & -1 & 1 \\
+                 1 & 2 & 2 \\
+                \end{array}
+                \right)
+        """)
+        gen7m = MathTex(r"\xrightarrow{-2 R_1 + R_2}").next_to(gen7, LEFT)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen7), Write(gen7m))
+        self.wait(1)
+
+        gen8 = MathTex(r"""
+            \left(
+\begin{array}{ccc}
+ 1 & 2 & 0 \\
+ 0 & -3 & 1 \\
+ 0 & -5 & 1 \\
+ 1 & 2 & 2 \\
+\end{array}
+\right)
+                """)
+        gen8m = MathTex(r"\xrightarrow{-2 R_1 + R_3}").next_to(gen8, LEFT)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen8), Write(gen8m))
+        self.wait(1)
+
+        gen9 = MathTex(r"""
+\left(
+\begin{array}{ccc}
+ 1 & 2 & 0 \\
+ 0 & -3 & 1 \\
+ 0 & -5 & 1 \\
+ 0 & 0 & 2 \\
+\end{array}
+\right)
+                        """)
+        gen9m = MathTex(r"\xrightarrow{- R_1 + R_4}").next_to(gen9, LEFT)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen9), Write(gen9m))
+        self.wait(1)
+
+        gen10 = MathTex(r"""
+\left(
+\begin{array}{ccc}
+ 1 & 2 & 0 \\
+ 0 & 1 & -\frac{1}{3} \\
+ 0 & -5 & 1 \\
+ 0 & 0 & 2 \\
+\end{array}
+\right)
+                                """)
+        gen10m = MathTex(r"\xrightarrow{- \frac{1}{3}R_2 }").next_to(gen10, LEFT)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen10), Write(gen10m))
+        self.wait(1)
+
+        gen10 = MathTex(r"""
+        \left(
+\begin{array}{ccc}
+ 1 & 2 & 0 \\
+ 0 & 1 & -\frac{1}{3} \\
+ 0 & 0 & -\frac{2}{3} \\
+ 0 & 0 & 2 \\
+\end{array}
+\right)
+                                        """)
+        gen10m = MathTex(r"\xrightarrow{5 R_2 + R_3}").next_to(gen10, LEFT)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen10), Write(gen10m))
+        self.wait(1)
+
+        gen10 = MathTex(r"""
+\left(
+\begin{array}{ccc}
+ 1 & 2 & 0 \\
+ 0 & 1 & -\frac{1}{3} \\
+ 0 & 0 & 1 \\
+ 0 & 0 & 2 \\
+\end{array}
+\right)
+                                                """)
+        gen10m = MathTex(r"\xrightarrow{-\frac{3}{2} R_3}").next_to(gen10, LEFT)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen10), Write(gen10m))
+        self.wait(1)
+
+        gen10 = MathTex(r"""
+        \left(
+        \begin{array}{ccc}
+         1 & 2 & 0 \\
+         0 & 1 & -\frac{1}{3} \\
+         0 & 0 & 1 \\
+         0 & 0 & 0 \\
+        \end{array}
+        \right)
+                                                        """)
+        gen10m = MathTex(r"\xrightarrow{-2 R_3 + R_4}").next_to(gen10, LEFT)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen10), Write(gen10m))
+        self.wait(1)
+
+        gen10 = MathTex(r"""
+                \therefore \left(
+                \begin{array}{cc}
+                 p_1 & p_2\\
+                 p_3 & p_4
+                \end{array}
+                \right) =
+                 \left(
+                \begin{array}{cc}
+                 x_1 & x_2\\
+                 x_3 & 0
+                \end{array}
+                \right) 
+        """)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen10))
+        self.wait(1)
+
+        gen10 = MathTex(r"""
+            \text{Solo hay 3 unos principales}\\
+            \therefore S \text{ es linearmente independiente}\\
+            \therefore S \text{ no genera } M_{2x2}
+        """)
+
+        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(Write(gen10))
