@@ -34,6 +34,24 @@ class Expo1(Scene):
     def construct(self):
         self: Scene
 
+        corona = ImageMobject("./Intro.jpg")
+        corona.scale(0.4)
+
+        self.play(FadeIn(corona))
+
+        self.wait(3)
+
+        self.play(*[FadeOut(obj) for obj in self.mobjects])
+
+        text1 = MathTex(r"\text{Ejercicio}").shift(UP)
+        text2 = MathTex(r"\text{Archivo 1 - Problema 1D}").next_to(text1, DOWN)
+        text3 = MathTex(r"\text{Mayo 2022}").next_to(text2, DOWN)
+
+        self.play(Write(text1), Write(text2), Write(text3))
+
+        self.wait(3)
+        self.play(*[FadeOut(obj) for obj in self.mobjects])
+
         text0 = Text(
             "Resolver los siguientes sistemas de ecuaciones por medio\n"
             "de Gauss y de interpretacion geometrica del conjunto solucion", font_size=23.0
@@ -522,8 +540,25 @@ class Expo1Pos(ThreeDScene):
 
 class Expo2(Scene):
     def construct(self):
+        corona = ImageMobject("./Intro.jpg")
+        corona.scale(0.4)
 
-        text1 = MathTex(r"\text{1. Determine si } S \text{ es genera } M_{2,2}").shift(UP * 2)
+        self.play(FadeIn(corona))
+
+        self.wait(3)
+
+        self.play(*[FadeOut(obj) for obj in self.mobjects])
+
+        text1 = MathTex(r"\text{Ejercicio}").shift(UP)
+        text2 = MathTex(r"\text{Archivo 2 - Problema C25}").next_to(text1, DOWN)
+        text3 = MathTex(r"\text{Mayo 2022}").next_to(text2, DOWN)
+
+        self.play(Write(text1), Write(text2), Write(text3))
+
+        self.wait(3)
+        self.play(*[FadeOut(obj) for obj in self.mobjects])
+
+        text1 = MathTex(r"\text{1. Determine si } S \text{ genera } M_{2,2}").shift(UP * 2)
         text2 = MathTex(r"\text{2. Determine si } S \text{ es linealmente independiente}").next_to(text1, DOWN)
 
         self.play(Write(text1))
@@ -625,8 +660,8 @@ class Expo2(Scene):
         gen4 = MathTex(r"""
            \left(
                \begin{array}{cc}
-                    p_1 & p_2\\
-                    p_3 & p_4\\
+                    a & b\\
+                    c & d\\
                \end{array}
            \right) = 
             \left(
@@ -642,10 +677,10 @@ class Expo2(Scene):
         self.wait(1)
 
         gen5 = MathTex(r"""
-           x_1 + 2x_2 = p_1\\
-           2x_1 + x_2 + x_3 = p_2\\
-           2x_1-x_2+x_3 = p_3\\
-           x_1+2x_2+2x_3 = p_4
+           x_1 + 2x_2 = a\\
+           2x_1 + x_2 + x_3 = b\\
+           2x_1-x_2+x_3 = c\\
+           x_1+2x_2+2x_3 = d
        """)
 
         self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
@@ -654,11 +689,11 @@ class Expo2(Scene):
 
         gen6 = MathTex(r"""
             \left(
-               \begin{array}{ccc}
-                    1 & 2 & 0 \\
-                    2 & 1 & 1 \\
-                    2 & -1 & 1 \\
-                    1 & 2 & 2 \\
+               \begin{array}{ccc|c}
+                    1 & 2 & 0 & a \\
+                    2 & 1 & 1 & b \\
+                    2 & -1 & 1 & c\\
+                    1 & 2 & 2 & d\\
                \end{array}
            \right)
         """)
@@ -668,14 +703,14 @@ class Expo2(Scene):
         self.wait(1)
 
         gen7 = MathTex(r"""
-            \left(
-                \begin{array}{ccc}
-                 1 & 2 & 0\\
-                 0 & -3 & 1 \\
-                 2 & -1 & 1\\
-                 1 & 2 & 2 \\
-                \end{array}
-                \right)
+\left(
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & -3 & 1 & b-2 a \\
+ 2 & -1 & 1 & c \\
+ 1 & 2 & 2 & d \\
+\end{array}
+\right)
         """)
         gen7m = MathTex(r"\xrightarrow{-2 R_1 + R_2}").next_to(gen7, LEFT)
 
@@ -684,12 +719,12 @@ class Expo2(Scene):
         self.wait(1)
 
         gen8 = MathTex(r"""
-            \left(
-\begin{array}{ccc}
- 1 & 2 & 0 \\
- 0 & -3 & 1 \\
- 0 & -5 & 1 \\
- 1 & 2 & 2 \\
+\left(
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & -3 & 1 & b-2 a \\
+ 0 & -5 & 1 & c-2 a \\
+ 1 & 2 & 2 & d \\
 \end{array}
 \right)
                 """)
@@ -701,11 +736,11 @@ class Expo2(Scene):
 
         gen9 = MathTex(r"""
 \left(
-\begin{array}{ccc}
- 1 & 2 & 0 \\
- 0 & -3 & 1 \\
- 0 & -5 & 1  \\
- 0 & 0 & 2 \\
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & -3 & 1 & b-2 a \\
+ 0 & -5 & 1 & c-2 a \\
+ 0 & 0 & 2 & d-a \\
 \end{array}
 \right)
                         """)
@@ -717,11 +752,11 @@ class Expo2(Scene):
 
         gen10 = MathTex(r"""
 \left(
-\begin{array}{ccc}
- 1 & 2 & 0 \\
- 0 & 1 & -\frac{1}{3} \\
- 0 & -5 & 1\\
- 0 & 0 & 2 \
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & 1 & -\frac{1}{3} & \frac{1}{3} (2 a-b) \\
+ 0 & -5 & 1 & c-2 a \\
+ 0 & 0 & 2 & d-a \\
 \end{array}
 \right)
                                 """)
@@ -732,12 +767,12 @@ class Expo2(Scene):
         self.wait(1)
 
         gen10 = MathTex(r"""
-        \left(
-\begin{array}{ccc}
- 1 & 2 & 0 \\
- 0 & 1 & -\frac{1}{3} \\
- 0 & 0 & -\frac{2}{3} \\
- 0 & 0 & 2 \\
+\left(
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & 1 & -\frac{1}{3} & \frac{1}{3} (2 a-b) \\
+ 0 & 0 & -\frac{2}{3} & \frac{4 a}{3}-\frac{5 b}{3}+c \\
+ 0 & 0 & 2 & d-a \\
 \end{array}
 \right)
                                         """)
@@ -749,11 +784,11 @@ class Expo2(Scene):
 
         gen10 = MathTex(r"""
 \left(
-\begin{array}{cccc}
- 1 & 2 & 0 \\
- 0 & 1 & -\frac{1}{3} \\
- 0 & 0 & 1 \\
- 0 & 0 & 2 \\
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & 1 & -\frac{1}{3} & \frac{1}{3} (2 a-b) \\
+ 0 & 0 & 1 & \frac{1}{2} (-4 a+5 b-3 c) \\
+ 0 & 0 & 2 & d-a \\
 \end{array}
 \right)
                                                 """)
@@ -764,14 +799,14 @@ class Expo2(Scene):
         self.wait(1)
 
         gen10 = MathTex(r"""
-        \left(
-        \begin{array}{ccc}
-         1 & 2 & 0 \\
-         0 & 1 & -\frac{1}{3} \\
-         0 & 0 & 1 \\
-         0 & 0 & 0 \\
-        \end{array}
-        \right)
+\left(
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & 1 & -\frac{1}{3} & \frac{1}{3} (2 a-b) \\
+ 0 & 0 & 1 & \frac{1}{2} (-4 a+5 b-3 c) \\
+ 0 & 0 & 0 & 3 a-5 b+3 c+d \\
+\end{array}
+\right)
                                                         """)
         gen10m = MathTex(r"\xrightarrow{-2 R_3 + R_4}").next_to(gen10, LEFT)
 
@@ -780,14 +815,14 @@ class Expo2(Scene):
         self.wait(1)
 
         gen10 = MathTex(r"""
-                \left(
-                \begin{array}{ccc}
-                 1 & 2 & 0 \\
-                 0 & 1 & 0 \\
-                 0 & 0 & 1 \\
-                 0 & 0 & 0 \\
-                \end{array}
-                \right)
+\left(
+\begin{array}{ccc|c}
+ 1 & 2 & 0 & a \\
+ 0 & 1 & 0 & \frac{b-c}{2} \\
+ 0 & 0 & 1 & \frac{1}{2} (-4 a+5 b-3 c) \\
+ 0 & 0 & 0 & 3 a-5 b+3 c+d \\
+\end{array}
+\right)
                                                                 """)
         gen10m = MathTex(r"\xrightarrow{\frac{1}{3} R_3 + R_2}").next_to(gen10, LEFT)
 
@@ -796,14 +831,14 @@ class Expo2(Scene):
         self.wait(1)
 
         gen10 = MathTex(r"""
-                        \left(
-                        \begin{array}{ccc}
-                         1 & 0 & 0 \\
-                         0 & 1 & 0 \\
-                         0 & 0 & 1 \\
-                         0 & 0 & 0 \\
-                        \end{array}
-                        \right)
+\left(
+\begin{array}{ccc|c}
+ 1 & 0 & 0 & a-b+c \\
+ 0 & 1 & 0 & \frac{b-c}{2} \\
+ 0 & 0 & 1 & \frac{1}{2} (-4 a+5 b-3 c) \\
+ 0 & 0 & 0 & 3 a-5 b+3 c+d \\
+\end{array}
+\right)
                                                                         """)
         gen10m = MathTex(r"\xrightarrow{-2 R_2 + R_1}").next_to(gen10, LEFT)
 
@@ -812,11 +847,17 @@ class Expo2(Scene):
         self.wait(1)
 
         gen10 = MathTex(r"""
-                    \therefore \text{No hay } x_1, x_2, x_3 \text{ que generen } M_{2,2}\\
-                    \text{Hay 3 unos principales}\\
+                    \text{La matriz reducida tiene la diagonal (1,1,1)}\\ 
+                    \therefore \text{Hay 3 unos principales}\\
                     \therefore S \text{ es linearmente independiente}\\
-                    \therefore S \text{ no genera } M_{2x2}
+                    0 \neq 3 a-5 b+3 c+d\\
+                    \therefore \text{No hay } x_1, x_2, x_3 \text{ que generen } M_{2,2}\\
+                    \therefore S \text{ no genera } M_{2,2}
                 """)
 
-        self.play(*[obj.animate.shift(UP * 3) for obj in self.mobjects])
+        self.play(*[obj.animate.shift(UP * 4) for obj in self.mobjects])
         self.play(Write(gen10))
+
+        self.wait(10)
+
+        self.play(*[FadeOut(obj) for obj in self.mobjects])
